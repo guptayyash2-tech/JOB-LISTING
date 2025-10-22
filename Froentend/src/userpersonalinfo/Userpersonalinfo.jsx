@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { savePersonalInfo } from "../../Api";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-
+import { savePersonalInfo, setAuthToken } from "../../Api";
 
 const Userpersonalinfo = () => {
-     const navigate = useNavigate();
+  const navigate = useNavigate();
+
   const [personalData, setPersonalData] = useState({
     address: "",
     pincode: "",
@@ -12,6 +12,14 @@ const Userpersonalinfo = () => {
     mobilenumber1: "",
     mobilenumber2: "",
   });
+
+  const [message, setMessage] = useState("");
+
+  // ✅ Set auth token from localStorage once when component mounts
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) setAuthToken(token);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,13 +29,11 @@ const Userpersonalinfo = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await savePersonalInfo(personalData);
-      console.log(response);
-      alert("Personal information saved successfully!");
-      navigate("/");
+      await savePersonalInfo(personalData); // token is already in Axios headers
+      setMessage("✅ Personal information saved successfully!");
+      navigate("/"); // redirect after success
     } catch (error) {
-      console.error("Error saving info:", error);
-      alert("Something went wrong. Please try again.");
+      setMessage(`❌ ${error.response?.data?.message || error.message}`);
     }
   };
 
@@ -37,81 +43,54 @@ const Userpersonalinfo = () => {
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
           User Personal Information
         </h2>
+
+        {message && <p className="text-center mb-4">{message}</p>}
+
         <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Address
-            </label>
-            <input
-              type="text"
-              name="address"
-              value={personalData.address}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter your address"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Pincode
-            </label>
-            <input
-              type="text"
-              name="pincode"
-              value={personalData.pincode}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter pincode"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              City
-            </label>
-            <input
-              type="text"
-              name="city"
-              value={personalData.city}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter city name"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Mobile Number 1
-            </label>
-            <input
-              type="text"
-              name="mobilenumber1"
-              value={personalData.mobilenumber1}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter primary mobile number"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Mobile Number 2
-            </label>
-            <input
-              type="text"
-              name="mobilenumber2"
-              value={personalData.mobilenumber2}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter secondary mobile number"
-            />
-          </div>
-
+          <input
+            type="text"
+            name="address"
+            value={personalData.address}
+            onChange={handleChange}
+            placeholder="Address"
+            className="w-full border rounded-lg p-2.5"
+            required
+          />
+          <input
+            type="text"
+            name="pincode"
+            value={personalData.pincode}
+            onChange={handleChange}
+            placeholder="Pincode"
+            className="w-full border rounded-lg p-2.5"
+            required
+          />
+          <input
+            type="text"
+            name="city"
+            value={personalData.city}
+            onChange={handleChange}
+            placeholder="City"
+            className="w-full border rounded-lg p-2.5"
+            required
+          />
+          <input
+            type="text"
+            name="mobilenumber1"
+            value={personalData.mobilenumber1}
+            onChange={handleChange}
+            placeholder="Primary Mobile Number"
+            className="w-full border rounded-lg p-2.5"
+            required
+          />
+          <input
+            type="text"
+            name="mobilenumber2"
+            value={personalData.mobilenumber2}
+            onChange={handleChange}
+            placeholder="Secondary Mobile Number"
+            className="w-full border rounded-lg p-2.5"
+          />
           <button
             type="submit"
             className="w-full bg-blue-600 text-white font-medium py-2.5 rounded-lg hover:bg-blue-700 transition duration-200"

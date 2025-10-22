@@ -36,6 +36,7 @@ const Home = () => {
   ];
 
   const authLinks = [
+    { to: "/savepersonalinfo", label: "Add Personal Info", style: "bg-green-600" },
     { to: "/getpersonalinfo", label: "User Personal Info", style: "bg-green-600" },
     { to: "/getresumes", label: "Get Resume", style: "bg-green-600" },
     { to: "/usergetprofile", label: "User Profile", style: "bg-yellow-500" },

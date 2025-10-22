@@ -29,7 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} 
         /> 
 
-        <Route path="/userpersonalinfo" element={<Userpersonalinfo />} />
+        <Route path="/savepersonalinfo" element={<Userpersonalinfo />} />
         <Route path="/usergetprofile" element={<UserProfile />} />
         <Route path="/updateuserprofile" element={<UpdateUserProfile />} />
         <Route path="/getpersonalinfo" element={<Usergetpersonalinfo />} />
