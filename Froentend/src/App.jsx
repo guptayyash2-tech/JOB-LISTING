@@ -15,6 +15,7 @@ import UserRegister from "./userlogin/Register";
 import Adminlogin from "./ADMIN/Adminlogin/Adminlogin";
 import AdminProfile from "./ADMIN/Adminlogin/Amingetprofile";
 import AdminUpdate from "./ADMIN/Adminlogin/Adminupdate";
+import CompanyInformation from "./ADMIN/Companyinformtion/Comapnyinformation";
 
 
 function App() {
@@ -42,6 +43,8 @@ function App() {
 <Route path="/adminlogin" element={<Adminlogin />} />
 <Route path="/admingetprofile" element={<AdminProfile />} />
 <Route path="/adminupdateprofile" element={<AdminUpdate />} />
+
+<Route path="/companycreate" element={<CompanyInformation />} />
       </Routes>
   
     

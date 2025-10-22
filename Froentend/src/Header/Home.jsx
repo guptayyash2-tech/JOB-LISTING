@@ -41,6 +41,7 @@ const Home = () => {
     { to: "/getresumes", label: "Get Resume", style: "bg-green-600" },
     { to: "/usergetprofile", label: "User Profile", style: "bg-yellow-500" },
     { to: "/admingetprofile", label: "Admin Profile", style: "bg-yellow-500" },
+    { to: "/companycreate", label: "Create Company", style: "bg-blue-600" },
   ];
 
   return (

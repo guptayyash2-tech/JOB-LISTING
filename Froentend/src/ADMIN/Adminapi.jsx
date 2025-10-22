@@ -61,4 +61,16 @@ export const updateadminProfile = async (profileData) => {
       headers: { "Content-Type": "multipart/form-data" },
     })
   );
+
 };
+
+export const createCompanyInformation = async (companyData) => {
+  const token = localStorage.getItem("token");
+  if (token) setAuthToken(token); // ✅ ensure token before call
+  return handleRequest(() => admin.post("/companycreate", companyData));
+}
+export const getCompanyInformationByUserId = async () => {
+  const token = localStorage.getItem("token");
+  if (token) setAuthToken(token);
+  return handleRequest(() => admin.get("/getcompanyinfo"));
+} 
