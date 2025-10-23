@@ -6,6 +6,7 @@ const employerjoblisting = require("../../mongo/adminlogin/employerjoblisting");
 const applyForJob = async (req, res) => {
   try {
     const { jobId } = req.params;
+    const resumefiles = req.file ? req.file.buffer.toString("base64") : null;
 
     // Check if file is uploaded
     if (!req.file) {
@@ -22,6 +23,7 @@ const applyForJob = async (req, res) => {
     const existingApplication = await applyjob.findOne({
       user: req.user._id,
       jobListing: jobId,
+      resume: resumefiles,
     });
     if (existingApplication) {
       return res.status(400).json({ message: "You already applied for this job." });
@@ -32,7 +34,7 @@ const applyForJob = async (req, res) => {
       admin: job.admin, // employer who posted the job
       user: req.user._id, // current logged-in user
       jobListing: jobId,
-      resume: req.file.path,
+      resume: resumefiles,
     });
 
     await newApplication.save();

@@ -41,7 +41,7 @@ function App() {
         <Route path="/updatepersonalinfo" element={<UserUpdateInfo />} />
 <Route path="/postresume" element={<CreateResume />} />
 <Route path="/getresumes" element={<UserGetResume />} />
-<Route path="/applyjob" element={<ApplyJob />} />
+<Route path="/applyjob/:jobId" element={<ApplyJob />} />
 
 
 <Route path="/adminregister" element={<AdminRegister />} />

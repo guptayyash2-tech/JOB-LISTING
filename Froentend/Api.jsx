@@ -78,9 +78,13 @@ export const getResumes = async () => {
   const response = await api.get("/getresumes");
   return response.data;
 }
-export const applyForJob = async (formData) => {
-  const response = await api.post("/applyjob", formData, {
+export const getAllJob = async () => {
+  const response = await api.get("/joblistings");
+  return response.data;
+}
+export const applyForJob = async (jobId, formData) => {
+  const response = await api.post(`/applyjob/${jobId}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return response.data;
-}
+};

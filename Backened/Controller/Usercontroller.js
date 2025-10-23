@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../mongo/Userlogin/user");
+const employerjoblisting = require("../mongo/adminlogin/employerjoblisting");
 // Generate JWT
 const generateToken = (userId) => {
   if (!process.env.JWT_SECRET) {
@@ -106,4 +107,14 @@ const updateuserprofile = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, getuserprofile, updateuserprofile };
+const getjoblist = async (req, res, next) => {
+  try {
+    const jobs = await employerjoblisting.find();
+   
+    res.json({ jobs });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, getuserprofile, updateuserprofile, getjoblist };
