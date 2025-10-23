@@ -1,6 +1,6 @@
-const JobListing = require("../mongo/adminlogin/employerjoblisting")
+const applyjob = require("../../mongo/adminlogin/applyjob");
+const employerjoblisting = require("../../mongo/adminlogin/employerjoblisting");
 
-const ApplyJob = require("../mongo/adminlogin/applyjob")
 
 // 📦 Apply for a Job
 const applyForJob = async (req, res) => {
@@ -13,13 +13,13 @@ const applyForJob = async (req, res) => {
     }
 
     // Check if job exists
-    const job = await JobListing.findById(jobId);
+    const job = await employerjoblisting.findById(jobId);
     if (!job) {
       return res.status(404).json({ message: "Job not found." });
     }
 
     // Prevent duplicate applications
-    const existingApplication = await ApplyJob.findOne({
+    const existingApplication = await applyjob.findOne({
       user: req.user._id,
       jobListing: jobId,
     });
