@@ -7,7 +7,7 @@ const generateToken = (adminId) => {
   if (!process.env.JWT_SECRET) {
     throw new Error("JWT_SECRET is not defined in environment variables");
   }
-  return jwt.sign({ id: adminId }, process.env.JWT_SECRET, { expiresIn: "25d" });
+  return jwt.sign({ id: adminId, role: "admin" }, process.env.JWT_SECRET, { expiresIn: "25d" });
 };
 
 // @desc    Register admin
@@ -84,6 +84,7 @@ const adminlogin = async (req, res, next) => {
         userImage: foundAdmin.userImage,
       },
       token,
+      role: foundAdmin.role
     });
   } catch (error) {
     next(error);

@@ -29,8 +29,9 @@ pancard: {
   userImage: {
     type: String,
     required: true
-  }
-}, { timestamps: true });   
+  },
+  role: { type: String, enum: ["user", "admin"], default: "admin" }, // ✅ Add this line
+}, { timestamps: true });
 
 // Export model
 module.exports = mongoose.model('Admin', adminregister);

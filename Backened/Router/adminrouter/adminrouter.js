@@ -8,7 +8,8 @@ const {
   updateadminprofile,
 } = require("../../Controller/admincontroller");
 const adminprotect = require("../../middlewear/adminmiddile");
-const { createCompanyInformation, getCompanyInformationByUserId } = require("../../Controller/comapnycontroller");
+const { createCompanyInformation, getCompanyInformation } = require("../../Controller/comapnycontroller");
+
 
 
 // Configure multer for in-memory file storage
@@ -23,5 +24,5 @@ adminRouter.put("/adminupdateprofile", adminprotect,upload.single("userImage"), 
 
 
 adminRouter.post("/companycreate", adminprotect, createCompanyInformation);
-adminRouter.get("/getcompanyinfo", adminprotect, getCompanyInformationByUserId);
+adminRouter.get("/getcompanyinfo", adminprotect, getCompanyInformation);
 module.exports = adminRouter;

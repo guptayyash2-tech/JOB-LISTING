@@ -1,35 +1,48 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { login, setAuthToken } from "../../Api";
-
+import { useNavigate, Link } from "react-router-dom";
+import { login, setAuthToken } from "../../Api"; // your Axios API functions
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    emailid: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ emailid: "", password: "" });
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = await login(formData);
-      const { token } = data;
+    setLoading(true);
+    setMessage("");
 
-      // Save token and set auth header
+    try {
+      const data = await login(formData); // call backend login
+      const { token, role } = data;
+
+      // Save token & role
       localStorage.setItem("token", token);
+      localStorage.setItem("role", (role || "user").toLowerCase());
+
+      // Set axios auth header
       setAuthToken(token);
 
-      setMessage("✅ Login successful!");
-      navigate("/"); // redirect after login
-    } catch (error) {
-      setMessage(`❌ ${error.response?.data?.message || error.message}`);
+      setMessage("✅ Login successful! Redirecting...");
+      
+      // Navigate to Home after short delay
+      setTimeout(() => {
+        navigate("/");
+        window.location.reload(); // ensure Home reads role
+      }, 800);
+
+    } catch (err) {
+      setMessage(`❌ ${err.response?.data?.message || err.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -37,7 +50,7 @@ const Login = () => {
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Welcome Back
+          User Login
         </h2>
 
         {message && (
@@ -54,9 +67,9 @@ const Login = () => {
           <input
             type="email"
             name="emailid"
-            placeholder="Email Address"
             value={formData.emailid}
             onChange={handleChange}
+            placeholder="Email Address"
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
           />
@@ -64,18 +77,21 @@ const Login = () => {
           <input
             type="password"
             name="password"
-            placeholder="Password"
             value={formData.password}
             onChange={handleChange}
+            placeholder="Password"
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
           />
 
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg py-3 transition duration-200"
+            disabled={loading}
+            className={`w-full ${
+              loading ? "bg-gray-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700"
+            } text-white font-semibold rounded-lg py-3 transition duration-200`}
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 

@@ -1,8 +1,8 @@
-
+const companyinformation = require("../mongo/adminlogin/company");
 const createCompanyInformation = async (req, res) => {
   try {
     const {
-      companyname,
+      companyName,
       companyEmail,
       companyPhone,
       website,
@@ -14,15 +14,20 @@ const createCompanyInformation = async (req, res) => {
       contactPersonPhone
     } = req.body;
 
+    // Validation
+    if (!companyName || !companyEmail) {
+      return res.status(400).json({ message: "Company name and email are required" });
+    }
+
     // Check if company info already exists for this admin
-    let existingCompany = await companyinformation.findOne({ admin: req.admin._id });
+    const existingCompany = await companyinformation.findOne({ admin: req.admin._id });
     if (existingCompany) {
       return res.status(400).json({ message: "Company information already exists" });
     }
 
     const companyInfo = new companyinformation({
       admin: req.admin._id,
-      companyName: companyname,
+      companyName,
       companyEmail,
       companyPhone,
       website,
@@ -35,10 +40,29 @@ const createCompanyInformation = async (req, res) => {
     });
 
     await companyInfo.save();
-    res.status(201).json({ company: companyInfo });
+    res.status(201).json({ success: true, company: companyInfo });
 
   } catch (error) {
-    console.error(error);
+    console.error("Error creating company information:", error.message);
     res.status(500).json({ message: "Error creating company information" });
   }
+};
+
+const getCompanyInformation = async (req, res) => {
+  try {
+    const companyInfo = await companyinformation.findOne({ admin: req.admin._id });
+    if (!companyInfo) {
+      return res.status(404).json({ message: "Company information not found" });
+    }
+
+    res.status(200).json({ success: true, company: companyInfo });
+  } catch (error) {
+    console.error("Error fetching company information:", error.message);
+    res.status(500).json({ message: "Error fetching company information" });
+  }
+};
+
+module.exports = {
+  createCompanyInformation,
+  getCompanyInformation
 };

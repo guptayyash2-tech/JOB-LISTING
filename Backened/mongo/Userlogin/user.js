@@ -28,6 +28,8 @@ const userregister = new mongoose.Schema({
   image:{
     type: String
  },
+   role: { type: String, enum: ["user", "admin"], default: "user" }, // ✅ Add this line
+
 },
 { timestamps: true });   
 
