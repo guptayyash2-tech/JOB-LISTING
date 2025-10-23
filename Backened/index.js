@@ -25,7 +25,7 @@ index.set("view engine", "ejs");
 
 // MongoDB connection
 const DB_PATH =
-  "mongodb+srv://yashgupta:group8amdox@group8.mwqmfsy.mongodb.net/?retryWrites=true&w=majority&appName=group8";
+  "mongodb+srv://joblisting:jgs1PFD5ZamlrERR@group8.mwqmfsy.mongodb.net/?retryWrites=true&w=majority&appName=group8"
 
 const mongostore = require("connect-mongodb-session")(session);
 

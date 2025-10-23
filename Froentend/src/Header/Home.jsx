@@ -13,11 +13,12 @@ const userLinks = [
   { to: "/getpersonalinfo", label: "User Personal Info", style: "bg-green-600" },
   { to: "/getresumes", label: "Get Resume", style: "bg-green-600" },
   { to: "/usergetprofile", label: "User Profile", style: "bg-yellow-500" },
+  { to: "/createjoblisting", label: "Show job detail", style: "bg-blue-600" },
 ];
 
 const adminLinks = [
   { to: "/admingetprofile", label: "Admin Profile", style: "bg-yellow-500" },
-  { to: "/companycreate", label: "Create Company", style: "bg-blue-600" },
+  { to: "/createjoblisting", label: "Create Job Listing", style: "bg-blue-600" },
 ];
 
 const Home = () => {

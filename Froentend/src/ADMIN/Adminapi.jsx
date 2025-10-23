@@ -80,3 +80,8 @@ export const createJobListing = async (jobData) => {
   if (token) setAuthToken(token); // ✅ ensure token before call  
   return handleRequest(() => admin.post("/createjoblisting", jobData));
 }
+export const getAllJobListings = async () => {
+  const token = localStorage.getItem("token");
+  if (token) setAuthToken(token);
+  return handleRequest(() => admin.get("/getjoblistings"));
+}

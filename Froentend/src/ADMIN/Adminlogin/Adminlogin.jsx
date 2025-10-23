@@ -31,7 +31,7 @@ const Adminlogin = () => {
 
       setMessage("✅ Login successful! Redirecting...");
       setTimeout(() => {
-        navigate("/");
+        navigate("/companycreate");
         window.location.reload();
       }, 800);
 

@@ -17,6 +17,9 @@ import AdminProfile from "./ADMIN/Adminlogin/Amingetprofile";
 import AdminUpdate from "./ADMIN/Adminlogin/Adminupdate";
 import CompanyInformation from "./ADMIN/Companyinformtion/Comapnyinformation";
 import Employerjob from "./ADMIN/Companyinformtion/Employerjob";
+import Getcompanyinformation from "./ADMIN/Companyinformtion/Getcompanyinformation";
+import Getjoblistings from "./ADMIN/Companyinformtion/Getjoblisting";
+import ApplyJob from "./userpersonalinfo/Showjobdetail";
 
 
 function App() {
@@ -38,6 +41,7 @@ function App() {
         <Route path="/updatepersonalinfo" element={<UserUpdateInfo />} />
 <Route path="/postresume" element={<CreateResume />} />
 <Route path="/getresumes" element={<UserGetResume />} />
+<Route path="/applyjob" element={<ApplyJob />} />
 
 
 <Route path="/adminregister" element={<AdminRegister />} />
@@ -47,6 +51,11 @@ function App() {
 
 <Route path="/companycreate" element={<CompanyInformation />} />
 <Route path="/createjoblisting" element={<Employerjob />} />
+<Route path="/getcompanyinfo" element={<Getcompanyinformation />} />
+<Route path="/getjoblistings" element={<Getjoblistings />} />
+
+
+
       </Routes>
   
     
