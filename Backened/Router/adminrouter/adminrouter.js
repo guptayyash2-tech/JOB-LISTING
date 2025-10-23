@@ -9,6 +9,7 @@ const {
 } = require("../../Controller/admincontroller");
 const adminprotect = require("../../middlewear/adminmiddile");
 const { createCompanyInformation, getCompanyInformation } = require("../../Controller/comapnycontroller");
+const { createJobListing } = require("../../Controller/employerjoblistingcontroller");
 
 
 
@@ -25,4 +26,5 @@ adminRouter.put("/adminupdateprofile", adminprotect,upload.single("userImage"), 
 
 adminRouter.post("/companycreate", adminprotect, createCompanyInformation);
 adminRouter.get("/getcompanyinfo", adminprotect, getCompanyInformation);
+adminRouter.post("/createjoblisting", adminprotect, createJobListing);
 module.exports = adminRouter;

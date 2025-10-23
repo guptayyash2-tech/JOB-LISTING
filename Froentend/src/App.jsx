@@ -16,6 +16,7 @@ import Adminlogin from "./ADMIN/Adminlogin/Adminlogin";
 import AdminProfile from "./ADMIN/Adminlogin/Amingetprofile";
 import AdminUpdate from "./ADMIN/Adminlogin/Adminupdate";
 import CompanyInformation from "./ADMIN/Companyinformtion/Comapnyinformation";
+import Employerjob from "./ADMIN/Companyinformtion/Employerjob";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
 <Route path="/adminupdateprofile" element={<AdminUpdate />} />
 
 <Route path="/companycreate" element={<CompanyInformation />} />
+<Route path="/createjoblisting" element={<Employerjob />} />
       </Routes>
   
     
