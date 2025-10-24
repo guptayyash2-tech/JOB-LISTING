@@ -14,6 +14,8 @@ const CreateResume = () => {
     hoobys: "",
     resume: null,
     image: null,
+    title: "",
+    summary: "",
   });
 
   const [message, setMessage] = useState("");
@@ -87,7 +89,7 @@ const CreateResume = () => {
 
           {/* Right Column */}
           <div className="space-y-4">
-            {["experience", "skills", "hoobys"].map((field) => (
+            {["experience", "skills", "hoobys", "title", "summary"].map((field) => (
               <input
                 key={field}
                 type="text"

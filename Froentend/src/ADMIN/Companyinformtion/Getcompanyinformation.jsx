@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { getCompanyInformationByUserId, setAuthToken } from "../Adminapi";
 
 const GetCompanyInformation = () => {
@@ -40,47 +40,91 @@ const GetCompanyInformation = () => {
     fetchCompanyInfo();
   }, [navigate]);
 
-  if (loading) return <p className="text-center mt-6">Loading...</p>;
+  if (loading)
+    return <p className="text-center mt-6 text-gray-600 text-lg">Loading...</p>;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-      <div className="w-full max-w-lg bg-white shadow-lg rounded-2xl p-8">
-        <h2 className="text-2xl font-semibold text-center mb-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
+      <div className="w-full max-w-lg bg-white shadow-xl rounded-2xl p-8 mb-6">
+        <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">
           Company Information
         </h2>
 
         {information ? (
-          <div className="space-y-2 text-gray-700">
-            <p><strong>Company Name:</strong> {information.companyName}</p>
-            <p><strong>Email:</strong> {information.companyEmail}</p>
-            <p><strong>Phone:</strong> {information.companyPhone}</p>
-            <p><strong>Website:</strong> {information.website}</p>
-            <p><strong>Address:</strong> {information.address}</p>
-            <p><strong>City:</strong> {information.city}</p>
-            <p><strong>Pincode:</strong> {information.pincode}</p>
-            <p><strong>Contact Person:</strong> {information.contactPersonName}</p>
-            <p><strong>Contact Email:</strong> {information.contactPersonEmail}</p>
-            <p><strong>Contact Phone:</strong> {information.contactPersonPhone}</p>
+          <div className="space-y-3 text-gray-800">
+            <p>
+              <span className="font-semibold text-blue-600">Company Name:</span>{" "}
+              {information.companyName}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-600">Email:</span>{" "}
+              {information.companyEmail}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-600">Phone:</span>{" "}
+              {information.companyPhone}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-600">Website:</span>{" "}
+              {information.website}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-600">Address:</span>{" "}
+              {information.address}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-600">City:</span>{" "}
+              {information.city}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-600">Pincode:</span>{" "}
+              {information.pincode}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-600">
+                Contact Person:
+              </span>{" "}
+              {information.contactPersonName}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-600">
+                Contact Email:
+              </span>{" "}
+              {information.contactPersonEmail}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-600">
+                Contact Phone:
+              </span>{" "}
+              {information.contactPersonPhone}
+            </p>
 
             <button
-              onClick={() => navigate("/companyinformation")}
-              className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+              onClick={() => navigate("/updatecompanyinfo")}
+              className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg shadow hover:bg-blue-700 transition duration-200"
             >
               Edit Company Info
             </button>
           </div>
         ) : (
-          <div className="text-center">
-            <p className="text-gray-500 mb-4">{error}</p>
+          <div className="text-center space-y-4">
+            <p className="text-red-500 font-medium">{error}</p>
             <button
               onClick={() => navigate("/companycreate")}
-              className="w-full bg-blue-600 text-green-500 py-2 rounded hover:bg-blue-700"
+              className="w-full bg-green-600 text-white py-2 rounded-lg shadow hover:bg-green-700 transition duration-200"
             >
               Add Company Info
             </button>
           </div>
         )}
       </div>
+
+      <Link
+        to="/"
+        className="w-full max-w-lg text-center bg-gray-600 text-white py-2 rounded-lg shadow hover:bg-gray-700 transition duration-200"
+      >
+        Back to Home
+      </Link>
     </div>
   );
 };

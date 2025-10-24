@@ -22,6 +22,8 @@ import Getjoblistings from "./ADMIN/Companyinformtion/Getjoblisting";
 import ApplyJob from "./userpersonalinfo/Showjobdetail";
 import { Heading } from "lucide-react";
 import HeadingJob from "./userpersonalinfo/Headingjob";
+import UpdateCompanyInformation from "./ADMIN/Companyinformtion/Updatecompanyiformation";
+import UpdateResume from "../UpdateResume";
 
 
 function App() {
@@ -43,6 +45,7 @@ function App() {
         <Route path="/updatepersonalinfo" element={<UserUpdateInfo />} />
 <Route path="/postresume" element={<CreateResume />} />
 <Route path="/getresumes" element={<UserGetResume />} />
+<Route path="/updateresume/:id" element={<UpdateResume />} />
 <Route path="/applyjob/:jobId" element={<ApplyJob />} />
 
 
@@ -50,6 +53,7 @@ function App() {
 <Route path="/adminlogin" element={<Adminlogin />} />
 <Route path="/admingetprofile" element={<AdminProfile />} />
 <Route path="/adminupdateprofile" element={<AdminUpdate />} />
+<Route path="/updatecompanyinfo" element={<UpdateCompanyInformation />} />
 
 <Route path="/companycreate" element={<CompanyInformation />} />
 <Route path="/createjoblisting" element={<Employerjob />} />

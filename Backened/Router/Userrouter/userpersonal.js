@@ -7,7 +7,7 @@ const {
   updatePersonalInfo,
 } = require("../../Controller/userpersonalinformation");
 const protect = require("../../middlewear/usermiddle");
-const { postresume, getResume } = require("../../Controller/resume");
+const { postresume, getResume, updateResume, deleteResume } = require("../../Controller/resume");
 
     const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -30,5 +30,10 @@ userpersonalrouter.post(
 
 // Get all resumes
 userpersonalrouter.get("/getresumes", protect, getResume);
+userpersonalrouter.put("/updateresume/:id", upload.fields([
+    { name: "resume", maxCount: 1 },
+    { name: "image", maxCount: 1 },
+  ]), protect, updateResume);
+  userpersonalrouter.delete("/deleteresume/:id", protect, deleteResume)
 
 module.exports = userpersonalrouter;

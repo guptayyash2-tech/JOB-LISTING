@@ -74,6 +74,11 @@ export const getCompanyInformationByUserId = async () => {
   if (token) setAuthToken(token);
   return handleRequest(() => admin.get("/getcompanyinfo"));
 } 
+export const updateCompanyInformation = async (companyData) => {
+  const token = localStorage.getItem("token");
+  if (token) setAuthToken(token);
+  return handleRequest(() => admin.put("/updatecompanyinfo", companyData));
+}
 
 export const createJobListing = async (jobData) => {
   const token = localStorage.getItem("token");
