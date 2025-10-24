@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3015/api";
+const BASE_URL = "http://localhost:3016/api";
 
 // Create base Axios instance
 export const api = axios.create({
@@ -82,9 +82,11 @@ export const getAllJob = async () => {
   const response = await api.get("/joblistings");
   return response.data;
 }
-export const applyForJob = async (jobId, formData) => {
-  const response = await api.post(`/applyjob/${jobId}`, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+export const applyForJob = async (jobId) => {
+  const response = await api.post(`/applyjob/${jobId}`);
   return response.data;
 };
+export const getJobById = async (jobId) => {
+  const response = await api.get(`/job/${jobId}`);
+  return response.data;
+}

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3015/admin";
+const BASE_URL = "http://localhost:3016/admin";
 
 // Create Axios instance
 export const admin = axios.create({
@@ -84,4 +84,9 @@ export const getAllJobListings = async () => {
   const token = localStorage.getItem("token");
   if (token) setAuthToken(token);
   return handleRequest(() => admin.get("/getjoblistings"));
+}
+export const deleteJobListingById = async (jobId) => {
+  const token = localStorage.getItem("token");
+  if (token) setAuthToken(token);
+  return handleRequest(() => admin.delete(`/deletejoblisting/${jobId}`));
 }

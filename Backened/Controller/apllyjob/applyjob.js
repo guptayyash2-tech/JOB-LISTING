@@ -1,47 +1,41 @@
-const applyjob = require("../../mongo/adminlogin/applyjob");
 const employerjoblisting = require("../../mongo/adminlogin/employerjoblisting");
+const ApplyJob = require("../../mongo/adminlogin/applyjob");
 
 
-// 📦 Apply for a Job
+// 📝 Apply for a Job (no resume required)
 const applyForJob = async (req, res) => {
   try {
+    const userId = req.user._id;
     const { jobId } = req.params;
-    const resumefiles = req.file ? req.file.buffer.toString("base64") : null;
-
-    // Check if file is uploaded
-    if (!req.file) {
-      return res.status(400).json({ message: "Resume file is required." });
-    }
 
     // Check if job exists
     const job = await employerjoblisting.findById(jobId);
     if (!job) {
-      return res.status(404).json({ message: "Job not found." });
+      return res.status(404).json({ message: "Job not found" });
     }
 
-    // Prevent duplicate applications
-    const existingApplication = await applyjob.findOne({
-      user: req.user._id,
+    // Check if user already applied
+    const alreadyApplied = await ApplyJob.findOne({
+      user: userId,
       jobListing: jobId,
-      resume: resumefiles,
     });
-    if (existingApplication) {
+
+    if (alreadyApplied) {
       return res.status(400).json({ message: "You already applied for this job." });
     }
 
-    // Create application
+    // Create new application (no resume)
     const newApplication = new ApplyJob({
-      admin: job.admin, // employer who posted the job
-      user: req.user._id, // current logged-in user
+      user: userId,
       jobListing: jobId,
-      resume: resumefiles,
+      admin: job.admin, // Assuming each job has an admin/creator field
     });
 
     await newApplication.save();
 
     res.status(201).json({
       success: true,
-      message: "Applied successfully!",
+      message: "Application submitted successfully!",
       application: newApplication,
     });
   } catch (error) {

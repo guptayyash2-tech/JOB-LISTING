@@ -18,10 +18,7 @@ const applyJobSchema = new mongoose.Schema(
       ref: "JobListing", // Reference to the job listing
       required: true,
     },
-    resume: {
-      type: String, // File path or URL to uploaded resume
-      required: true,
-    },
+   
     appliedAt: {
       type: Date,
       default: Date.now,

@@ -20,6 +20,8 @@ import Employerjob from "./ADMIN/Companyinformtion/Employerjob";
 import Getcompanyinformation from "./ADMIN/Companyinformtion/Getcompanyinformation";
 import Getjoblistings from "./ADMIN/Companyinformtion/Getjoblisting";
 import ApplyJob from "./userpersonalinfo/Showjobdetail";
+import { Heading } from "lucide-react";
+import HeadingJob from "./userpersonalinfo/Headingjob";
 
 
 function App() {
@@ -53,6 +55,7 @@ function App() {
 <Route path="/createjoblisting" element={<Employerjob />} />
 <Route path="/getcompanyinfo" element={<Getcompanyinformation />} />
 <Route path="/getjoblistings" element={<Getjoblistings />} />
+<Route path="/applyjob" element={<HeadingJob />} />
 
 
 

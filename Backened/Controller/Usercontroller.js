@@ -116,5 +116,15 @@ const getjoblist = async (req, res, next) => {
     next(error);
   }
 };
+const getjobbyid = async (req, res, next) => {
+  try {
+    const jobId = req.params.jobId;
+    const job = await employerjoblisting.findById(jobId);
+    if (!job) return res.status(404).json({ message: "Job not found" });
+    res.json({ job });
+  } catch (error) {
+    next(error);
+  }
+};
 
-module.exports = { register, login, getuserprofile, updateuserprofile, getjoblist };
+module.exports = { register, login, getuserprofile, updateuserprofile, getjoblist, getjobbyid };

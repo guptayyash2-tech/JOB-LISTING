@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const { getuserprofile, login, register, updateuserprofile, getjoblist } = require("../../Controller/Usercontroller");
+const { getuserprofile, login, register, updateuserprofile, getjoblist, getjobbyid } = require("../../Controller/Usercontroller");
 const protect = require("../../middlewear/usermiddle");
 const { applyForJob } = require("../../Controller/apllyjob/applyjob");
 
@@ -17,6 +17,7 @@ router.get("/usergetprofile", protect, getuserprofile);
 router.put("/userupdateprofile", protect, updateuserprofile);
 router.get("/joblistings", protect, getjoblist);
 
-router.post("/applyjob/:jobId", protect, upload.single("resume"), applyForJob);
+router.post("/applyjob/:jobId", protect, applyForJob);
+router.get("/job/:jobId", protect, getjobbyid);
 
 module.exports = router;
