@@ -13,12 +13,16 @@ const applyJobSchema = new mongoose.Schema(
       ref: "User", // Reference to the applicant
       required: true,
     },
-    jobListing: {
+     jobListing: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "JobListing", // Reference to the job listing
+      ref: "EmployerJobListing", // ✅ must match exactly
       required: true,
     },
-   
+    resume: {
+      type: String,
+      data: String, // URL or file path to the resume
+    },
+      status: { type: String, enum: ["pending", "approved", "rejected"], default: "pending" },
     appliedAt: {
       type: Date,
       default: Date.now,

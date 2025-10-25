@@ -19,6 +19,7 @@ const adminLinks = [
   { to: "/admingetprofile", label: "Admin Profile", style: "bg-blue-500" },
   { to: "/getjoblistings", label: "Get Job Listing", style: "bg-blue-600" },
   { to: "/getcompanyinfo", label: "Get Company Info", style: "bg-blue-500" },
+  { to: "/getjobapplications", label: "Get  All Job Applications", style: "bg-blue-600" },
 ];
 
 const Home = () => {

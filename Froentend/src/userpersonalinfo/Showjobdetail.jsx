@@ -9,6 +9,7 @@ const ApplyJob = () => {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [resume, setResume] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -33,9 +34,17 @@ const ApplyJob = () => {
   }, [jobId, navigate]);
 
   const handleApply = async () => {
+    if (!resume) {
+      setMessage("❌ Please upload your resume before applying.");
+      return;
+    }
+
     try {
       setSubmitting(true);
-      const res = await applyForJob(jobId);
+      const formData = new FormData();
+      formData.append("resume", resume);
+
+      const res = await applyForJob(jobId, formData);
       setMessage("✅ " + res.message);
       setTimeout(() => setMessage(""), 5000);
     } catch (err) {
@@ -91,6 +100,19 @@ const ApplyJob = () => {
             <span className="font-semibold text-gray-900">Salary:</span>{" "}
             {job.salaryRange}
           </p>
+        </div>
+
+        {/* Resume Upload */}
+        <div className="mt-6">
+          <label className="block mb-2 font-medium text-gray-700">
+            Upload Resume (PDF/DOC):
+          </label>
+          <input
+            type="file"
+            accept=".pdf,.doc,.docx"
+            onChange={(e) => setResume(e.target.files[0])}
+            className="w-full px-4 py-2 border rounded-lg"
+          />
         </div>
 
         {message && (

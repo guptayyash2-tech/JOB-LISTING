@@ -10,7 +10,7 @@ const {
 const adminprotect = require("../../middlewear/adminmiddile");
 const { createCompanyInformation, getCompanyInformation, updateCompanyInformation } = require("../../Controller/comapnycontroller");
 const { createJobListing, getJobListings, deleteJobListing } = require("../../Controller/employerjoblistingcontroller");
-const { applyForJob, getAllApplicationsByAdmin } = require("../../Controller/apllyjob/applyjob");
+const {  getAllApplicationsByAdmin, approveApplication, rejectApplication } = require("../../Controller/apllyjob/applyjob");
 
 
 
@@ -32,4 +32,7 @@ adminRouter.get("/getjoblistings", adminprotect, getJobListings);
 adminRouter.put("/updatecompanyinfo", adminprotect, updateCompanyInformation);
 adminRouter.post("/getapplyjob", adminprotect, getAllApplicationsByAdmin);
 adminRouter.delete("/deletejoblisting/:id", adminprotect, deleteJobListing);
+adminRouter.get("/getjobapplications", adminprotect, getAllApplicationsByAdmin);
+adminRouter.put("/approveapplication/:id", adminprotect, approveApplication);
+adminRouter.put("/rejectapplication/:id", adminprotect, rejectApplication);
 module.exports = adminRouter;

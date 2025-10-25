@@ -95,3 +95,19 @@ export const deleteJobListingById = async (jobId) => {
   if (token) setAuthToken(token);
   return handleRequest(() => admin.delete(`/deletejoblisting/${jobId}`));
 }
+export const getAllApplications = async () => {
+  const token = localStorage.getItem("token");
+  if (token) setAuthToken(token);
+  return handleRequest(() => admin.get("/getjobapplications"));
+}
+
+export const approveApplication = async (applicationId) => {
+  const token = localStorage.getItem("token");
+  if (token) setAuthToken(token);
+  return handleRequest(() => admin.put(`/approveapplication/${applicationId}`));
+}
+export const rejectApplication = async (applicationId) => {
+  const token = localStorage.getItem("token");
+  if (token) setAuthToken(token);
+  return handleRequest(() => admin.put(`/rejectapplication/${applicationId}`));
+}

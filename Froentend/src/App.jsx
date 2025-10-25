@@ -24,6 +24,8 @@ import { Heading } from "lucide-react";
 import HeadingJob from "./userpersonalinfo/Headingjob";
 import UpdateCompanyInformation from "./ADMIN/Companyinformtion/Updatecompanyiformation";
 import UpdateResume from "../UpdateResume";
+import GetjobListings from "./ADMIN/Companyinformtion/Getjoblisting";
+import AdminApplications from "./ADMIN/Admininformation/Getjobapllication";
 
 
 function App() {
@@ -61,6 +63,7 @@ function App() {
 <Route path="/getjoblistings" element={<Getjoblistings />} />
 <Route path="/applyjob" element={<HeadingJob />} />
 
+<Route path="/getjobapplications" element={<AdminApplications />} />
 
 
       </Routes>

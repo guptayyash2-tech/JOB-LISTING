@@ -17,7 +17,7 @@ router.get("/usergetprofile", protect, getuserprofile);
 router.put("/userupdateprofile", protect, updateuserprofile);
 router.get("/joblistings", protect, getjoblist);
 
-router.post("/applyjob/:jobId", protect, applyForJob);
+router.post("/applyjob/:jobId", protect, upload.single("resume"), applyForJob);
 router.get("/job/:jobId", protect, getjobbyid);
 
 module.exports = router;
